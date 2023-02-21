@@ -4,13 +4,13 @@ from django.utils import timezone
 
 class Author(models.Model):
     name = models.CharField(max_length=25)
-    age = models.IntegerField(blank=True)
+    age = models.IntegerField(blank=True, default=0)
 
     def __str__(self):
         return self.name
 
 class Post(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
